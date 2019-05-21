@@ -1,0 +1,5 @@
+*
+
+!.gitignore
+!src/index.js
+!tsconfig.json

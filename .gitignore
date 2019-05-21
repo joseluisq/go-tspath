@@ -1,0 +1,6 @@
+bin
+vendor
+debug
+*.log
+*.bin
+/*.html
