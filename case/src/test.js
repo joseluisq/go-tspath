@@ -8,6 +8,6 @@ const c = require('~/222C')
 
 let c
 
-if c = require('~/333D') {
+if (c = require('~/333D')) {
     // nothing to do
 }
