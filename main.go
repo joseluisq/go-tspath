@@ -29,8 +29,8 @@ func main() {
 
 	var writer = bufio.NewWriter(w)
 
-	rep := redel.NewRedel(r, "require('", "')", "+++++")
-	// rep := redel.NewRedel(r, "START", "END", "+++++")
+	// rep := redel.NewRedel(r, "require('", "')", "+++++")
+	rep := redel.NewRedel(r, "START", "END", "+++++")
 
 	replaceFunc := func(data []byte, atEOF bool) {
 		_, err := writer.Write(data)
@@ -41,18 +41,37 @@ func main() {
 		}
 	}
 
-	filterFunc := func(matchValue []byte) bool {
-		fmt.Println("Match value:", string(matchValue))
+	filterFunc := func(matchValue []byte) []byte {
+		value := string(matchValue)
+
+		fmt.Println("MATCH VALUE::", value)
 		fmt.Println("------")
 
-		if string(matchValue) == "~/222C" {
-			return false
+		// if value == "~/222C" || value == "~/111B" {
+		// 	return false
+		// }
+
+		// if value == "~/222C" || value == "~/111B" {
+		// 	return false
+		// }
+
+		if value == " slice, " {
+			// TODO: Fix Redel to support extra chars
+			return append(matchValue, []byte("====")...)
 		}
 
-		return true
+		// if value == "~/222C" {
+		// 	return append(matchValue, []byte("AAA")...)
+		// }
+
+		// if value == " slice, " {
+		// 	return false
+		// }
+
+		return matchValue
 	}
 
-	rep.FilterReplace(replaceFunc, filterFunc, true)
+	rep.FilterReplaceWith(replaceFunc, filterFunc, true)
 
 	writer.Flush()
 }

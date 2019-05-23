@@ -4,4 +4,5 @@ to a zero-length START slice, END even though it points
 
 to nothing. It has length zero and can be START appended to
 
-, with END allocation.
+, with END allocation START.
+END
