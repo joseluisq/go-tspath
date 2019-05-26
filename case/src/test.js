@@ -1,6 +1,6 @@
 console.log('a')
 
-const a = require('~/000A'); const a = require('~/111B')
+const a = require('~/000A'); const b = require('~/111B')
 
 console.log('b')
 

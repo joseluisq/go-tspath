@@ -29,18 +29,14 @@ func main() {
 
 	var writer = bufio.NewWriter(w)
 
-	rep := redel.NewRedel(r, "require('", "')")
+	rep := redel.New(r, []redel.Delimiter{
+		{Start: []byte("require('"), End: []byte("')")},
+		{Start: []byte("log('"), End: []byte("')")},
+	})
 	// rep := redel.NewRedel(r, "START", "END", "+++++")
 
 	replaceFunc := func(data []byte, atEOF bool) {
-		v := data
-
-		// if len(values) > 0 {
-		// 	d := append([]byte(nil), data...)
-		// 	v = append(d, values...)
-		// }
-
-		_, err := writer.Write(v)
+		_, err := writer.Write(data)
 
 		if err != nil {
 			fmt.Println(err)
@@ -48,46 +44,36 @@ func main() {
 		}
 	}
 
-	filterFunc := func(matchValue []byte) bool {
-		value := string(matchValue)
+	// filterFunc := func(matchValue []byte) bool {
+	// 	value := string(matchValue)
 
-		// fmt.Println("MATCH VALUE::", value)
-		// fmt.Println("------")
+	// 	// if value == "~/222C" || value == "~/111B" {
+	// 	// 	a := bytes.Replace(matchValue, []byte("~/"), []byte("___"), 1)
 
-		// if value == "~/222C" || value == "~/111B" {
-		// 	return false
-		// }
+	// 	// 	return a
+	// 	// }
 
-		// if value == "~/222C" || value == "~/111B" {
-		// 	return false
-		// }
+	// 	if value == " slice, " {
+	// 		// TODO: Fix Redel to support extra chars
+	// 		// return append(matchValue, []byte("====")...)
+	// 		// return []byte("...........................")
+	// 	}
 
-		// if value == "~/222C" || value == "~/111B" {
-		// 	a := bytes.Replace(matchValue, []byte("~/"), []byte("___"), 1)
+	// 	if value == "~/222C" {
+	// 		return false
+	// 	}
 
-		// 	return a
-		// }
+	// 	// if value == " slice, " {
+	// 	// 	return false
+	// 	// }
 
-		if value == " slice, " {
-			// TODO: Fix Redel to support extra chars
-			// return append(matchValue, []byte("====")...)
-			// return []byte("...........................")
-		}
+	// 	return true
 
-		if value == "~/222C" {
-			return false
-		}
+	// 	// return matchValue
+	// }
 
-		// if value == " slice, " {
-		// 	return false
-		// }
-
-		return true
-
-		// return matchValue
-	}
-
-	rep.FilterReplace([]byte("1234567"), replaceFunc, filterFunc, true)
+	rep.Replace([]byte("1234567"), replaceFunc)
+	// rep.ReplaceFilter([]byte("1234567"), replaceFunc, filterFunc, true)
 
 	writer.Flush()
 }
