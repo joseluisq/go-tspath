@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"os"
 
@@ -33,7 +34,6 @@ func main() {
 		{Start: []byte("require('"), End: []byte("')")},
 		{Start: []byte("log('"), End: []byte("')")},
 	})
-	// rep := redel.NewRedel(r, "START", "END", "+++++")
 
 	replaceFunc := func(data []byte, atEOF bool) {
 		_, err := writer.Write(data)
@@ -47,33 +47,28 @@ func main() {
 	// filterFunc := func(matchValue []byte) bool {
 	// 	value := string(matchValue)
 
-	// 	// if value == "~/222C" || value == "~/111B" {
-	// 	// 	a := bytes.Replace(matchValue, []byte("~/"), []byte("___"), 1)
-
-	// 	// 	return a
-	// 	// }
-
-	// 	if value == " slice, " {
-	// 		// TODO: Fix Redel to support extra chars
-	// 		// return append(matchValue, []byte("====")...)
-	// 		// return []byte("...........................")
-	// 	}
-
-	// 	if value == "~/222C" {
+	// 	if value == "~/111B" {
 	// 		return false
 	// 	}
 
-	// 	// if value == " slice, " {
-	// 	// 	return false
-	// 	// }
-
 	// 	return true
-
-	// 	// return matchValue
 	// }
 
-	rep.Replace([]byte("1234567"), replaceFunc)
+	filterFunc := func(matchValue []byte) []byte {
+		value := string(matchValue)
+
+		if value == "~/111B" || value == "~/333D" {
+			b := bytes.Replace(matchValue, []byte("~/"), []byte("./"), 1)
+
+			return b
+		}
+
+		return matchValue
+	}
+
+	// rep.Replace([]byte("1234567"), replaceFunc)
 	// rep.ReplaceFilter([]byte("1234567"), replaceFunc, filterFunc, true)
+	rep.ReplaceFilterWith(replaceFunc, filterFunc, true)
 
 	writer.Flush()
 }
