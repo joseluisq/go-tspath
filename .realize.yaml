@@ -6,7 +6,8 @@ schema:
 - name: go-tspath
   path: .
   args:
-  # - server
+    - -source=./case/src/**/*.js
+    - -config=./case/tsconfig.json
   commands:
     run:
       status: true

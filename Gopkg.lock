@@ -2,12 +2,12 @@
 
 
 [[projects]]
-  digest = "1:6d0dddd102534fd9375317117f5ade9e8b18476ed68970de3adcf59a5308c512"
+  digest = "1:3c2f3f75e0134c8be98159279afc6a680d40a7a344d68df605002c218ab7f185"
   name = "github.com/joseluisq/redel"
   packages = ["."]
   pruneopts = "UT"
-  revision = "cf9df14a1f61f702d183d0bedbfe33eee293da31"
-  version = "1.0.0"
+  revision = "c4faf791d4ccded95c4416856637925c48ec7de8"
+  version = "v2.0.0-rc.1"
 
 [solve-meta]
   analyzer-name = "dep"

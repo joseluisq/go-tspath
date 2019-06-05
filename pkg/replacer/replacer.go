@@ -1,15 +1,16 @@
-package main
+package replacer
 
 import (
 	"bufio"
 	"bytes"
 	"fmt"
 	"os"
-
-	"github.com/joseluisq/redel"
+	"redel"
 )
 
-func main() {
+// Replace replaces every TS path occurence per file
+// TODO:
+func Replace() {
 	r, err := os.Open("case/src/test.js")
 
 	if err != nil {
@@ -32,7 +33,9 @@ func main() {
 
 	rep := redel.New(r, []redel.Delimiter{
 		{Start: []byte("require('"), End: []byte("')")},
-		{Start: []byte("log('"), End: []byte("')")},
+		{Start: []byte("require(\""), End: []byte("\")")},
+		{Start: []byte("from \""), End: []byte("\";")},
+		{Start: []byte("from '"), End: []byte("';")},
 	})
 
 	replaceFunc := func(data []byte, atEOF bool) {
@@ -44,30 +47,17 @@ func main() {
 		}
 	}
 
-	// filterFunc := func(matchValue []byte) bool {
-	// 	value := string(matchValue)
-
-	// 	if value == "~/111B" {
-	// 		return false
-	// 	}
-
-	// 	return true
-	// }
+	prefixSearch := []byte("~/")
+	replaceValue := []byte("+++")
 
 	filterFunc := func(matchValue []byte) []byte {
-		value := string(matchValue)
-
-		if value == "~/111B" || value == "~/333D" {
-			b := bytes.Replace(matchValue, []byte("~/"), []byte("./"), 1)
-
-			return b
+		if bytes.HasPrefix(matchValue, prefixSearch) {
+			return bytes.Replace(matchValue, prefixSearch, replaceValue, 1)
 		}
 
 		return matchValue
 	}
 
-	// rep.Replace([]byte("1234567"), replaceFunc)
-	// rep.ReplaceFilter([]byte("1234567"), replaceFunc, filterFunc, true)
 	rep.ReplaceFilterWith(replaceFunc, filterFunc, true)
 
 	writer.Flush()
