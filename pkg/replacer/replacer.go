@@ -8,10 +8,17 @@ import (
 	"redel"
 )
 
+type (
+	// TSPathReplacement defines a single Typescript path with its replacement
+	TSPathReplacement struct {
+		Pattern     []byte
+		Replacement []byte
+	}
+)
+
 // Replace replaces every TS path occurence per file
-// TODO:
-func Replace() {
-	r, err := os.Open("case/src/test.js")
+func Replace(filePath string, replacements []TSPathReplacement) {
+	r, err := os.Open(filePath)
 
 	if err != nil {
 		fmt.Println(err)
@@ -20,7 +27,7 @@ func Replace() {
 
 	defer r.Close()
 
-	w, err := os.Create("case/src/test.mod.js")
+	w, err := os.Create(filePath + ".mod.js")
 
 	if err != nil {
 		fmt.Println(err)
@@ -47,12 +54,11 @@ func Replace() {
 		}
 	}
 
-	prefixSearch := []byte("~/")
-	replaceValue := []byte("+++")
-
 	filterFunc := func(matchValue []byte) []byte {
-		if bytes.HasPrefix(matchValue, prefixSearch) {
-			return bytes.Replace(matchValue, prefixSearch, replaceValue, 1)
+		for _, tspath := range replacements {
+			if bytes.HasPrefix(matchValue, tspath.Pattern) {
+				return bytes.Replace(matchValue, tspath.Pattern, tspath.Replacement, 1)
+			}
 		}
 
 		return matchValue

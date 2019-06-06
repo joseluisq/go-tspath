@@ -1,12 +1,10 @@
-# Gopkg.toml example
-#
-# Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
-# for detailed Gopkg.toml documentation.
-#
+[[constraint]]
+  branch = "master"
+  name = "github.com/joseluisq/go-tspath"
 
 [[constraint]]
-  name = "github.com/joseluisq/redel"
-  version = "2.0.0-rc.1"
+  name = "github.com/mattn/go-zglob"
+  version = "0.0.1"
 
 [prune]
   go-tests = true

@@ -2,16 +2,30 @@
 
 
 [[projects]]
-  digest = "1:3c2f3f75e0134c8be98159279afc6a680d40a7a344d68df605002c218ab7f185"
-  name = "github.com/joseluisq/redel"
-  packages = ["."]
+  branch = "master"
+  digest = "1:4c7499a6ae3fa9e0375ee461b11b2f7a7828ddaef512979be9121bdfdb0d1335"
+  name = "github.com/joseluisq/go-tspath"
+  packages = ["pkg/tsconfig"]
   pruneopts = "UT"
-  revision = "c4faf791d4ccded95c4416856637925c48ec7de8"
-  version = "v2.0.0-rc.1"
+  revision = "4aa0e45ae26d7d20e952f12c28a147cf6e0f42e8"
+
+[[projects]]
+  digest = "1:36aebe90a13cf9128280ac834399b8bebf83685283c78df279d61c46bb2a8d83"
+  name = "github.com/mattn/go-zglob"
+  packages = [
+    ".",
+    "fastwalk",
+  ]
+  pruneopts = "UT"
+  revision = "2ea3427bfa539cca900ca2768d8663ecc8a708c1"
+  version = "v0.0.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/joseluisq/redel"]
+  input-imports = [
+    "github.com/joseluisq/go-tspath/pkg/tsconfig",
+    "github.com/mattn/go-zglob",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
