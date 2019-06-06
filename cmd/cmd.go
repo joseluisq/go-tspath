@@ -38,7 +38,7 @@ func Execute() {
 	}
 
 	// TODO: create a replacement string array
-	var replacements TSPathReplacement
+	var replacements tsconfig.TSPathReplacement
 
 	// TODO: replace all ocurrences per file
 	for _, file := range files {
