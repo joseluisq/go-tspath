@@ -6,18 +6,12 @@ import (
 	"fmt"
 	"os"
 	"redel"
-)
 
-type (
-	// TSPathReplacement defines a single Typescript path with its replacement
-	TSPathReplacement struct {
-		Pattern     []byte
-		Replacement []byte
-	}
+	"github.com/joseluisq/go-tspath/pkg/tsconfig"
 )
 
 // Replace replaces every TS path occurence per file
-func Replace(filePath string, replacements []TSPathReplacement) {
+func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 	r, err := os.Open(filePath)
 
 	if err != nil {

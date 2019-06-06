@@ -26,6 +26,12 @@ type (
 	TSConfigData struct {
 		CompilerOptions TSCompilerOptions `json:"compilerOptions"`
 	}
+
+	// TSPathReplacement defines a single Typescript path with its replacement
+	TSPathReplacement struct {
+		Pattern     []byte
+		Replacement []byte
+	}
 )
 
 // New creates a new TSConfig instance.
