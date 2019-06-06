@@ -3,11 +3,22 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:4c7499a6ae3fa9e0375ee461b11b2f7a7828ddaef512979be9121bdfdb0d1335"
+  digest = "1:463a97b08b68336092bf846e650039e5c89aa90f177ab09947009c5d2f0b8483"
   name = "github.com/joseluisq/go-tspath"
-  packages = ["pkg/tsconfig"]
+  packages = [
+    "pkg/replacer",
+    "pkg/tsconfig",
+  ]
   pruneopts = "UT"
-  revision = "4aa0e45ae26d7d20e952f12c28a147cf6e0f42e8"
+  revision = "da919041faef53e557874de54c971bbf5c675732"
+
+[[projects]]
+  digest = "1:be4ef4f61dc61fcc112ccaa40b8ebafc54928bd65de7e1bd4b38bb18f0f15098"
+  name = "github.com/joseluisq/redel"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c29b41a97f1fa7642ec70d9b8e6e92a96d67aaf7"
+  version = "v2.0.0"
 
 [[projects]]
   digest = "1:36aebe90a13cf9128280ac834399b8bebf83685283c78df279d61c46bb2a8d83"
@@ -24,7 +35,9 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/joseluisq/go-tspath/pkg/replacer",
     "github.com/joseluisq/go-tspath/pkg/tsconfig",
+    "github.com/joseluisq/redel",
     "github.com/mattn/go-zglob",
   ]
   solver-name = "gps-cdcl"

@@ -5,9 +5,9 @@ import (
 	"bytes"
 	"fmt"
 	"os"
-	"redel"
 
 	"github.com/joseluisq/go-tspath/pkg/tsconfig"
+	"github.com/joseluisq/redel"
 )
 
 // Replace replaces every TS path occurence per file

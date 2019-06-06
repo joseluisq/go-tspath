@@ -9,6 +9,7 @@ import (
 
 	"github.com/joseluisq/go-tspath/pkg/replacer"
 	"github.com/joseluisq/go-tspath/pkg/tsconfig"
+
 	zglob "github.com/mattn/go-zglob"
 )
 
@@ -20,8 +21,8 @@ func Execute() {
 
 	flag.Parse()
 
-	tsconfig := tsconfig.New(*configPath, *sourcePath)
-	config := tsconfig.Read()
+	tsconf := tsconfig.New(*configPath, *sourcePath)
+	config := tsconf.Read()
 
 	absSourcePath, err := filepath.Abs(*sourcePath)
 
@@ -38,7 +39,7 @@ func Execute() {
 	}
 
 	// TODO: create a replacement string array
-	var replacements tsconfig.TSPathReplacement
+	var replacements []tsconfig.TSPathReplacement
 
 	// TODO: replace all ocurrences per file
 	for _, file := range files {
