@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -39,7 +38,7 @@ func Execute() {
 		os.Exit(1)
 	}
 
-	// TODO: create the replacement string array (pattern-replacement)
+	// Create the replacement string array (pattern-replacement)
 	var replacements []tsconfig.TSPathReplacement
 
 	for kPathStr, vPathStr := range config.CompilerOptions.Paths {
@@ -60,10 +59,12 @@ func Execute() {
 		// Store pattern string as byte
 		pattern := []byte(patternStr)
 
+		// TODO: append replacement elements properly
 		// 2. Replacement placeholder: Take value parts skipping the last one
-		replacementBytes := []byte(nil)
+		var replacementBytes [][]byte
+		replacementBytes[0] = []byte(nil)
 
-		for _, vpathstr := range vPathStr {
+		for i, vpathstr := range vPathStr {
 			vparts := strings.Split(vpathstr, "/")
 
 			// Prevent no valid replacement paths
@@ -78,18 +79,19 @@ func Execute() {
 				continue
 			}
 
-			replacementBytes = append(replacementBytes, []byte(value)...)
+			replacementBytes[i] = append(replacementBytes[i], []byte(value)...)
 		}
 
-		fmt.Println("replacement PatternStr:", string(pattern))
-		fmt.Println("replacement Replacement:", string(replacementBytes))
+		// fmt.Println("replacement PatternStr:", string(pattern))
+		// fmt.Println("replacement Replacement:", string(replacementBytes))
 
-		// TODO: append values to `replacements` slice
+		replacements = append(replacements, tsconfig.TSPathReplacement{
+			Pattern:     pattern,
+			Replacement: replacementBytes,
+		})
 	}
 
-	fmt.Println("-----")
-
-	// TODO: replace all ocurrences per file
+	// Replace all occurrences per file
 	for _, file := range files {
 		replacer.Replace(file, replacements)
 	}

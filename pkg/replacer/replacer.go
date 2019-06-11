@@ -21,6 +21,7 @@ func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 
 	defer r.Close()
 
+	// TODO: write file content properly
 	w, err := os.Create(filePath + ".mod.js")
 
 	if err != nil {
@@ -50,8 +51,13 @@ func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 
 	filterFunc := func(matchValue []byte) []byte {
 		for _, tspath := range replacements {
+			fmt.Println("matchValue:", string(matchValue))
+
+			// TODO: replace every occurrence (first one in the Replacement array)
+			fmt.Println("matchValue:", tspath.Replacement)
+
 			if bytes.HasPrefix(matchValue, tspath.Pattern) {
-				return bytes.Replace(matchValue, tspath.Pattern, tspath.Replacement, 1)
+				return bytes.Replace(matchValue, tspath.Pattern, tspath.Replacement[0], 1)
 			}
 		}
 
