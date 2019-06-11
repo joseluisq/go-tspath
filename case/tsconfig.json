@@ -2,8 +2,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "~/*": [
-        "src/*"
+      "~/whatever-next/*": [
+        "src/*",
+        "lib/*"
       ]
     }
   }
