@@ -17,8 +17,12 @@ watch:
 .PHONY: watch
 
 release:
-	-goreleaser release --skip-publish --rm-dist
+	-goreleaser release --rm-dist
 .PHONY: release
+
+release-test:
+	-goreleaser release --skip-publish --rm-dist
+.PHONY: release-test
 
 build:
 	-env \
