@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:42cd225e5fd60ddfb8383a2f820825b1e4a6e624e9359467022bc80a64872d04"
+  digest = "1:3e06f0dd6e0f5ee0264cdeae854d2f4d093920cb393377bb85d1375e30a24c9f"
   name = "github.com/joseluisq/go-tspath"
   packages = [
     "cmd",
@@ -11,7 +11,7 @@
     "pkg/tsconfig",
   ]
   pruneopts = "UT"
-  revision = "2487a6cd80e2f17b59bf1aaab71a1729341f6779"
+  revision = "a270f7c6cbd57d2ab3051de46992f4ce89055580"
 
 [[projects]]
   digest = "1:be4ef4f61dc61fcc112ccaa40b8ebafc54928bd65de7e1bd4b38bb18f0f15098"
