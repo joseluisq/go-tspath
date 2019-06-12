@@ -59,12 +59,10 @@ func Execute() {
 		// Store pattern string as byte
 		pattern := []byte(patternStr)
 
-		// TODO: append replacement elements properly
 		// 2. Replacement placeholder: Take value parts skipping the last one
 		var replacementBytes [][]byte
-		replacementBytes[0] = []byte(nil)
 
-		for i, vpathstr := range vPathStr {
+		for _, vpathstr := range vPathStr {
 			vparts := strings.Split(vpathstr, "/")
 
 			// Prevent no valid replacement paths
@@ -79,11 +77,10 @@ func Execute() {
 				continue
 			}
 
-			replacementBytes[i] = append(replacementBytes[i], []byte(value)...)
+			replacementBytes = append(replacementBytes, [][]byte{
+				[]byte(value),
+			}...)
 		}
-
-		// fmt.Println("replacement PatternStr:", string(pattern))
-		// fmt.Println("replacement Replacement:", string(replacementBytes))
 
 		replacements = append(replacements, tsconfig.TSPathReplacement{
 			Pattern:     pattern,
@@ -96,8 +93,5 @@ func Execute() {
 		replacer.Replace(file, replacements)
 	}
 
-	// fmt.Println(config.CompilerOptions.Paths)
-	// fmt.Println("SOURCE_PATH:", *sourcePath)
-	// fmt.Println("ABS_SOURCE_PATH:", absSourcePath)
-	// fmt.Println("FILES:", files)
+	// TODO: Provide useful output information about the realized job
 }
