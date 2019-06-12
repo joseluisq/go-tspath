@@ -17,7 +17,7 @@ watch:
 .PHONY: watch
 
 release:
-	-goreleaser --snapshot --rm-dist
+	-goreleaser release --skip-publish --rm-dist
 .PHONY: release
 
 build:
