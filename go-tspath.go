@@ -2,7 +2,7 @@
 
 package main
 
-import "go-tspath/cmd"
+import "github.com/joseluisq/go-tspath/cmd"
 
 func main() {
 	cmd.Execute()

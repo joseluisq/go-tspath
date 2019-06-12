@@ -10,7 +10,7 @@
     "pkg/tsconfig",
   ]
   pruneopts = "UT"
-  revision = "f669e1b4d720bc651ae9ce866d59d772ee7432c5"
+  revision = "45e383de6a850aa76fece7d7d25e0f6422b125ae"
 
 [[projects]]
   digest = "1:be4ef4f61dc61fcc112ccaa40b8ebafc54928bd65de7e1bd4b38bb18f0f15098"

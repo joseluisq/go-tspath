@@ -1,19 +1,19 @@
 project_name: go-tspath
 release:
   name_template: '{{.Tag}}'
-brew:
-  name: go-tspath
-  commit_author:
-    name: goreleaserbot
-    email: goreleaser@carlosbecker.com
-  install: bin.install "go-tspath"
-scoop:
-  name: go-tspath
-  commit_author:
-    name: goreleaserbot
-    email: goreleaser@carlosbecker.com
-  url_template: https://github.com///releases/download/{{ .Tag }}/{{ .ArtifactName
-    }}
+# brew:
+#   name: go-tspath
+#   commit_author:
+#     name: goreleaserbot
+#     email: goreleaser@carlosbecker.com
+#   install: bin.install "go-tspath"
+# scoop:
+#   name: go-tspath
+#   commit_author:
+#     name: goreleaserbot
+#     email: goreleaser@carlosbecker.com
+#   url_template: https://github.com///releases/download/{{ .Tag }}/{{ .ArtifactName
+#     }}
 builds:
 - id: go-tspath
   goos:
