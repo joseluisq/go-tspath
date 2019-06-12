@@ -1,17 +1,21 @@
 # Go TSPath
 
-> A [Typescript paths](https://www.typescriptlang.org/docs/handbook/module-resolution.html) replacer written in Go. ⚡
+> A [Typescript paths](https://www.typescriptlang.org/docs/handbook/module-resolution.html) replacer written in [Go](https://golang.org/). ⚡
 
 __Status:__ WIP
 
 ## Installation
 
-```
+```sh
 go get -u github.com/joseluisq/go-tspath
 ```
 
 ## Usage
 
+```sh
+# after the tsc compiling just run:
+go-tspath -source=./src/**/*.js -config=./tsconfig.json
+```
 
 ## Contributions
 

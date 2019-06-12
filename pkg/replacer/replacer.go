@@ -22,7 +22,7 @@ func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 	defer r.Close()
 
 	// TODO: Write file content properly
-	w, err := os.Create(filePath + ".mod.js")
+	w, err := os.Create(filePath)
 
 	if err != nil {
 		fmt.Println(err)

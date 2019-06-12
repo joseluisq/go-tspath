@@ -3,14 +3,15 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:db8e4d428763507672dba3e4814043bd6627c5c486075cc75b20a6c976d80db2"
+  digest = "1:cf88aac8c8078bf5c6eaa765759dfbc255a2d40d6298cc45223f3c7e29502332"
   name = "github.com/joseluisq/go-tspath"
   packages = [
+    "cmd",
     "pkg/replacer",
     "pkg/tsconfig",
   ]
   pruneopts = "UT"
-  revision = "45e383de6a850aa76fece7d7d25e0f6422b125ae"
+  revision = "77d49af1d791c2d6288da4935f4b6b6e9e9a043b"
 
 [[projects]]
   digest = "1:be4ef4f61dc61fcc112ccaa40b8ebafc54928bd65de7e1bd4b38bb18f0f15098"
@@ -35,6 +36,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/joseluisq/go-tspath/cmd",
     "github.com/joseluisq/go-tspath/pkg/replacer",
     "github.com/joseluisq/go-tspath/pkg/tsconfig",
     "github.com/joseluisq/redel",
