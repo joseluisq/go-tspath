@@ -12,7 +12,7 @@ import (
 
 // Replace replaces every TS path occurence per file
 func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
-	r, err := os.Open(filePath)
+	r, err := os.OpenFile(filePath, os.O_RDONLY, 0)
 
 	if err != nil {
 		fmt.Println(err)
@@ -21,8 +21,7 @@ func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 
 	defer r.Close()
 
-	// TODO: Write file content properly
-	w, err := os.Create(filePath)
+	w, err := os.OpenFile(filePath, os.O_WRONLY, 0666)
 
 	if err != nil {
 		fmt.Println(err)
