@@ -14,7 +14,7 @@ go get -u github.com/joseluisq/go-tspath
 
 ```sh
 # after the tsc compiling just run:
-go-tspath -source=./src/**/*.js -config=./tsconfig.json
+go-tspath -config=./tsconfig.json
 ```
 
 ## API
@@ -24,8 +24,6 @@ go-tspath -source=./src/**/*.js -config=./tsconfig.json
 Usage of go-tspath:
   -config string
     	Specifies the Typescript configuration file. (default "./tsconfig.json")
-  -source string
-    	Specifies path of Javascript files emitted by tsc. (default "./dist/**/*.js")
 ```
 
 ## Contributions
