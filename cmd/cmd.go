@@ -16,22 +16,24 @@ import (
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	sourcePath := flag.String("source", "./dist/**/*.js", "Specifies path of Javascript files emitted by tsc.")
+	// outFilesPath := flag.String("source", "./dist/**/*.js", "Specifies path of Javascript files emitted by tsc.")
 	configPath := flag.String("config", "./tsconfig.json", "Specifies the Typescript configuration file.")
 
 	flag.Parse()
 
-	tsconf := tsconfig.New(*configPath, *sourcePath)
-	config := tsconf.Read()
+	config := tsconfig.New(*configPath).Read()
 
-	absSourcePath, err := filepath.Abs(*sourcePath)
+	outDir := config.CompilerOptions.OutDir
+	basePath := outDir
 
-	if err != nil {
-		log.Fatal(err)
-		os.Exit(1)
+	// Check if outDir is a relative dir path
+	if !filepath.IsAbs(outDir) {
+		basePath = filepath.Dir(*configPath)
 	}
 
-	files, err := zglob.Glob(absSourcePath)
+	outFilesPath := filepath.Join(basePath, outDir, "**/*.js")
+
+	files, err := zglob.Glob(outFilesPath)
 
 	if err != nil {
 		log.Fatal(err)
@@ -41,16 +43,16 @@ func Execute() {
 	// Create the replacement string array (pattern-replacement)
 	var replacements []tsconfig.TSPathReplacement
 
-	for kPathStr, vPathStr := range config.CompilerOptions.Paths {
-		kParts := strings.Split(kPathStr, "/")
+	for keyPathStr, valuePathStr := range config.CompilerOptions.Paths {
+		keyParts := strings.Split(keyPathStr, "/")
 
 		// 0. Prevent no valid paths (key-value)
-		if len(kParts) <= 0 || len(vPathStr) <= 0 {
+		if len(keyParts) <= 0 || len(valuePathStr) <= 0 {
 			continue
 		}
 
 		// 1. Pattern placeholder: Take key parts skipping the last one
-		patternStr := strings.TrimSpace(strings.Join(kParts[:len(kParts)-1], "/"))
+		patternStr := strings.TrimSpace(strings.Join(keyParts[:len(keyParts)-1], "/"))
 
 		if len(patternStr) <= 0 {
 			continue
@@ -62,7 +64,7 @@ func Execute() {
 		// 2. Replacement placeholder: Take value parts skipping the last one
 		var replacementBytes [][]byte
 
-		for _, vpathstr := range vPathStr {
+		for _, vpathstr := range valuePathStr {
 			vparts := strings.Split(vpathstr, "/")
 
 			// Prevent no valid replacement paths
@@ -90,7 +92,14 @@ func Execute() {
 
 	// Replace all occurrences per file
 	for _, file := range files {
-		replacer.Replace(file, replacements)
+		relFilePath, err := filepath.Rel(basePath, file)
+
+		if err != nil {
+			log.Fatal(err)
+			os.Exit(1)
+		}
+
+		replacer.Replace(file, relFilePath, outDir, replacements)
 	}
 
 	// TODO: Provide useful output information about the realized job

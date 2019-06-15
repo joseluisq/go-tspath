@@ -3,28 +3,30 @@ package replacer
 import (
 	"bufio"
 	"bytes"
-	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/joseluisq/go-tspath/pkg/tsconfig"
+
 	"github.com/joseluisq/redel"
 )
 
 // Replace replaces every TS path occurence per file
-func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
-	r, err := os.OpenFile(filePath, os.O_RDONLY, 0)
+func Replace(filePathAbs string, filePathRel string, outDir string, replacements []tsconfig.TSPathReplacement) {
+	r, err := os.OpenFile(filePathAbs, os.O_RDONLY, 0)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		os.Exit(1)
 	}
 
 	defer r.Close()
 
-	w, err := os.OpenFile(filePath, os.O_WRONLY, 0666)
+	w, err := os.OpenFile(filePathAbs, os.O_WRONLY, 0666)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 		os.Exit(1)
 	}
 
@@ -43,10 +45,12 @@ func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 		_, err := writer.Write(data)
 
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 			os.Exit(1)
 		}
 	}
+
+	pathRel := filepath.Dir(filePathRel)
 
 	filterFunc := func(matchValue []byte) []byte {
 		for _, vtspath := range replacements {
@@ -54,13 +58,18 @@ func Replace(filePath string, replacements []tsconfig.TSPathReplacement) {
 				continue
 			}
 
-			// (!) LIMITATION: Take first Replacement slice only
-			replacement := vtspath.Replacement[0]
-
-			// TODO: Consider `baseUrl` value
 			// TODO: Verify that every replaced path is valid (if path exists)
 			if bytes.HasPrefix(matchValue, vtspath.Pattern) {
-				return bytes.Replace(matchValue, vtspath.Pattern, replacement, 1)
+				repl := bytes.Replace(matchValue, vtspath.Pattern, []byte(outDir), 1)
+
+				replacement, err := filepath.Rel(pathRel, string(repl))
+
+				if err != nil {
+					log.Fatal(err)
+					os.Exit(1)
+				}
+
+				return []byte("./" + replacement)
 			}
 		}
 

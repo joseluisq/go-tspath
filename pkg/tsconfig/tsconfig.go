@@ -12,7 +12,6 @@ type (
 	// TSConfig defines tsconfig instance
 	TSConfig struct {
 		ConfigPath string
-		SourcePath string
 		Data       *TSConfigData
 	}
 
@@ -20,6 +19,7 @@ type (
 	TSCompilerOptions struct {
 		BaseURL string              `json:"baseUrl"`
 		Paths   map[string][]string `json:"paths"`
+		OutDir  string              `json:"outDir"`
 	}
 
 	// TSConfigData defines tsconfig json file properties
@@ -35,10 +35,9 @@ type (
 )
 
 // New creates a new TSConfig instance.
-func New(configPath string, sourcePath string) *TSConfig {
+func New(configPath string) *TSConfig {
 	return &TSConfig{
 		ConfigPath: configPath,
-		SourcePath: sourcePath,
 		Data: &TSConfigData{
 			CompilerOptions: TSCompilerOptions{
 				BaseURL: "./",
