@@ -1,0 +1,16 @@
+node_modules
+dist
+data
+extra
+db.json
+coverage
+*.~
+.tmp
+**/.DS_Store
+**/*.env
+**/*.log
+**/*.tar
+**/*.gz
+/test.js
+.dev/*
+package-lock.json
