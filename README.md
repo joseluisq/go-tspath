@@ -1,8 +1,10 @@
 # Go TSPath
 
-> A [Typescript paths](https://www.typescriptlang.org/docs/handbook/module-resolution.html) replacer written in [Go](https://golang.org/). ⚡
+> A fast [Typescript paths](https://www.typescriptlang.org/docs/handbook/module-resolution.html) replacer written in [Go](https://golang.org/). ⚡
 
-__Status:__ WIP
+__Status:__ Beta
+
+_🚀 View current beta releases at [go-tspath/releases](https://github.com/joseluisq/go-tspath/releases)._
 
 ## Installation
 
