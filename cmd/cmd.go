@@ -14,9 +14,7 @@ import (
 )
 
 // Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	// outFilesPath := flag.String("source", "./dist/**/*.js", "Specifies path of Javascript files emitted by tsc.")
 	configPath := flag.String("config", "./tsconfig.json", "Specifies the Typescript configuration file.")
 
 	flag.Parse()
