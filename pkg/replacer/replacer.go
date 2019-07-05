@@ -14,7 +14,7 @@ import (
 
 // Replace replaces every TS path occurence per file
 func Replace(filePathAbs string, filePathRel string, outDir string, replacements []tsconfig.TSPathReplacement) {
-	r, err := os.OpenFile(filePathAbs, os.O_RDONLY, 0)
+	r, err := os.Open(filePathAbs)
 
 	if err != nil {
 		log.Fatal(err)
@@ -23,7 +23,9 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 
 	defer r.Close()
 
-	w, err := os.OpenFile(filePathAbs, os.O_WRONLY, 0666)
+	filePathTemp := filePathAbs + ".js"
+
+	w, err := os.Create(filePathTemp)
 
 	if err != nil {
 		log.Fatal(err)
@@ -34,12 +36,7 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 
 	var writer = bufio.NewWriter(w)
 
-	rep := redel.New(r, []redel.Delimiter{
-		{Start: []byte("require('"), End: []byte("')")},
-		{Start: []byte("require(\""), End: []byte("\")")},
-		{Start: []byte("from \""), End: []byte("\";")},
-		{Start: []byte("from '"), End: []byte("';")},
-	})
+	pathRel := filepath.Dir(filePathRel)
 
 	replaceFunc := func(data []byte, atEOF bool) {
 		_, err := writer.Write(data)
@@ -48,9 +45,21 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 			log.Fatal(err)
 			os.Exit(1)
 		}
-	}
 
-	pathRel := filepath.Dir(filePathRel)
+		if atEOF {
+			err := os.Remove(filePathAbs)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			err = os.Rename(filePathTemp, filePathAbs)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+	}
 
 	filterFunc := func(matchValue []byte) []byte {
 		for _, vtspath := range replacements {
@@ -58,7 +67,6 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 				continue
 			}
 
-			// TODO: Verify that every replaced path is valid (if path exists)
 			if bytes.HasPrefix(matchValue, vtspath.Pattern) {
 				repl := bytes.Replace(matchValue, vtspath.Pattern, []byte(outDir), 1)
 
@@ -75,6 +83,13 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 
 		return matchValue
 	}
+
+	rep := redel.New(r, []redel.Delimiter{
+		{Start: []byte("require(\""), End: []byte("\");")},
+		// {Start: []byte("require('"), End: []byte("')")},
+		// {Start: []byte("from \""), End: []byte("\"")},
+		// {Start: []byte("from '"), End: []byte("'")},
+	})
 
 	rep.ReplaceFilterWith(replaceFunc, filterFunc, true)
 
