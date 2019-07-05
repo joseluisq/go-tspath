@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:97e4e04d492c50b45f197c3d5cc571d1562974c878e88b01b273bf8353469389"
+  digest = "1:ba9aae1373f4354ec77d8fee7de3de36a713548b963b9c50b0c3060c6e7ab1d7"
   name = "github.com/joseluisq/go-tspath"
   packages = [
     "cmd",
@@ -11,15 +11,15 @@
     "pkg/tsconfig",
   ]
   pruneopts = "UT"
-  revision = "f52ce38c90afb019c91ee7bf2af5e8f6e7f8022a"
+  revision = "252582857348415fc668eecd9829e576fa6c1198"
 
 [[projects]]
-  digest = "1:be4ef4f61dc61fcc112ccaa40b8ebafc54928bd65de7e1bd4b38bb18f0f15098"
+  digest = "1:4971694135f6115cf8a12599ab03656833e303dad4adeafe7ed2231a9e6c80bf"
   name = "github.com/joseluisq/redel"
   packages = ["."]
   pruneopts = "UT"
-  revision = "c29b41a97f1fa7642ec70d9b8e6e92a96d67aaf7"
-  version = "v2.0.0"
+  revision = "7c9544e6f638f8efb2ce42323130c03e7d3d6b5b"
+  version = "v2.0.1"
 
 [[projects]]
   digest = "1:36aebe90a13cf9128280ac834399b8bebf83685283c78df279d61c46bb2a8d83"
