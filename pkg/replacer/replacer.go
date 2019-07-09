@@ -86,9 +86,7 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 
 	rep := redel.New(r, []redel.Delimiter{
 		{Start: []byte("require(\""), End: []byte("\");")},
-		// {Start: []byte("require('"), End: []byte("')")},
-		// {Start: []byte("from \""), End: []byte("\"")},
-		// {Start: []byte("from '"), End: []byte("'")},
+		{Start: []byte("from \""), End: []byte("\";")},
 	})
 
 	rep.ReplaceFilterWith(replaceFunc, filterFunc, true)
