@@ -6,6 +6,7 @@ build:
   goos:
     - linux
     - darwin
+    - windows
   goarch:
     - amd64
 changelog:
@@ -13,7 +14,9 @@ changelog:
   filters:
     exclude:
       - '^docs:'
-      - '^refactor'
+      - '^test:'
+      - Merge pull request
+      - Merge branch
 sign:
   cmd: gpg
   args:
