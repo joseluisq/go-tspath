@@ -16,6 +16,18 @@ watch:
 	-realize start
 .PHONY: watch
 
+deps:
+	-dep ensure -update
+.PHONY: deps
+
+tsbuild:
+	@rm -rf ./sample/dist && cd sample && yarn build
+.PHONY: tsbuild
+
+tsreplace:
+	@./bin/go-tspath -config=./sample/tsconfig.json
+.PHONY: tsreplace
+
 release:
 	-goreleaser release --rm-dist
 .PHONY: release

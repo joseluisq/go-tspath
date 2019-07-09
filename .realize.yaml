@@ -6,7 +6,7 @@ schema:
 - name: go-tspath
   path: .
   args:
-    - -config=./sample/tsconfig.replace.json
+    - -config=./sample/tsconfig.json
   commands:
     run:
       status: true
