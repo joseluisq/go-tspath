@@ -14,12 +14,12 @@
   revision = "27ea2c66b620467df8d574bb9c2fbb999ecbc213"
 
 [[projects]]
-  digest = "1:4971694135f6115cf8a12599ab03656833e303dad4adeafe7ed2231a9e6c80bf"
+  digest = "1:42affa2810a964a1486901d272934c9c31b69052e0f58c1a8fc94237adb7c094"
   name = "github.com/joseluisq/redel"
   packages = ["."]
   pruneopts = "UT"
-  revision = "7c9544e6f638f8efb2ce42323130c03e7d3d6b5b"
-  version = "v2.0.1"
+  revision = "c24608f44b995e7f480449a8466105b61bf31fc3"
+  version = "v2.1.0"
 
 [[projects]]
   digest = "1:36aebe90a13cf9128280ac834399b8bebf83685283c78df279d61c46bb2a8d83"
