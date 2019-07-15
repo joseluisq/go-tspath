@@ -1,43 +1,28 @@
-# Go
-
-ifndef ENV_OS
-override ENV_OS = linux
-endif
-
-GO_OS=$(ENV_OS)
-GO_DEST=./bin
-GO_BINARY=$(GO_DEST)/go-tspath
+GO_BINARY=./bin/go-tspath
+GO_OS := $(shell uname -s | tr A-Z a-z)
 
 install:
-	-go get github.com/oxequa/realize
+	@go get github.com/markbates/refresh
 .PHONY: install
 
 watch:
-	-realize start
+	@refresh run
 .PHONY: watch
 
-deps:
-	-dep ensure -update
-.PHONY: deps
-
-tsbuild:
-	@rm -rf ./sample/dist && cd sample && yarn build
-.PHONY: tsbuild
-
-tsreplace:
-	@./bin/go-tspath -config=./sample/tsconfig.json
-.PHONY: tsreplace
+tidy:
+	@go mod tidy
+.PHONY: tidy
 
 release:
-	-goreleaser release --rm-dist
+	@goreleaser release --rm-dist
 .PHONY: release
 
 release-test:
-	-goreleaser release --skip-publish --rm-dist
+	@goreleaser release --skip-publish --rm-dist --snapshot
 .PHONY: release-test
 
 build:
-	-env \
+	env \
 		CGO_ENABLED=0 \
 		GOOS=$(GO_OS) \
 		go build \
