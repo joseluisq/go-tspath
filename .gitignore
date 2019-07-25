@@ -1,6 +1,8 @@
-bin
+*bin*
+*debug*
 vendor
-debug
+*.tmp
+*.txt
 *.log
 *.bin
-/*.html
+*.html

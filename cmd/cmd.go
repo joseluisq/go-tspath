@@ -39,7 +39,7 @@ func Execute() {
 	}
 
 	// Create the replacement string array (pattern-replacement)
-	var replacements []tsconfig.TSPathReplacement
+	var replacements []tsconfig.PathReplacement
 
 	for keyPathStr, valuePathStr := range config.CompilerOptions.Paths {
 		keyParts := strings.Split(keyPathStr, "/")
@@ -82,7 +82,7 @@ func Execute() {
 			}...)
 		}
 
-		replacements = append(replacements, tsconfig.TSPathReplacement{
+		replacements = append(replacements, tsconfig.PathReplacement{
 			Pattern:     pattern,
 			Replacement: replacementBytes,
 		})

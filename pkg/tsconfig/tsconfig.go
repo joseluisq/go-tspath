@@ -9,37 +9,41 @@ import (
 )
 
 type (
-	// TSConfig defines tsconfig instance
-	TSConfig struct {
+	// Config defines tsconfig instance
+	Config struct {
 		ConfigPath string
-		Data       *TSConfigData
+		Data       *ConfigData
 	}
 
-	// TSCompilerOptions defines a small Typescript compiler options
-	TSCompilerOptions struct {
+	// CompilerOptions defines a small Typescript compiler options
+	CompilerOptions struct {
 		BaseURL string              `json:"baseUrl"`
 		Paths   map[string][]string `json:"paths"`
 		OutDir  string              `json:"outDir"`
 	}
 
-	// TSConfigData defines tsconfig json file properties
-	TSConfigData struct {
-		CompilerOptions TSCompilerOptions `json:"compilerOptions"`
+	// ConfigData defines tsconfig json file properties
+	ConfigData struct {
+		CompilerOptions CompilerOptions `json:"compilerOptions"`
 	}
 
-	// TSPathReplacement defines a single Typescript path with its replacement
-	TSPathReplacement struct {
+	// PathReplacement defines a single Typescript path with its replacement
+	PathReplacement struct {
 		Pattern     []byte
 		Replacement [][]byte
 	}
 )
 
-// New creates a new TSConfig instance.
-func New(configPath string) *TSConfig {
-	return &TSConfig{
+// New creates a new Config instance.
+func New(configPath string) *Config {
+	if len(configPath) <= 0 {
+		configPath = "./tsconfig.json"
+	}
+
+	return &Config{
 		ConfigPath: configPath,
-		Data: &TSConfigData{
-			CompilerOptions: TSCompilerOptions{
+		Data: &ConfigData{
+			CompilerOptions: CompilerOptions{
 				BaseURL: "./",
 			},
 		},
@@ -47,7 +51,7 @@ func New(configPath string) *TSConfig {
 }
 
 // Read reads a tsconfig.json file
-func (tsconf *TSConfig) Read() TSConfigData {
+func (tsconf *Config) Read() ConfigData {
 	r, err := os.Open(tsconf.ConfigPath)
 
 	if err != nil {
@@ -59,7 +63,7 @@ func (tsconf *TSConfig) Read() TSConfigData {
 
 	dec := json.NewDecoder(r)
 
-	var data TSConfigData
+	var data ConfigData
 
 	for {
 		if err := dec.Decode(&data); err == io.EOF {

@@ -1,4 +1,4 @@
-# Go TSPath
+# Go TSPath [![Build Status](https://travis-ci.org/joseluisq/go-tspath.svg?branch=master)](https://travis-ci.org/joseluisq/go-tspath) [![codecov](https://codecov.io/gh/joseluisq/go-tspath/branch/master/graph/badge.svg)](https://codecov.io/gh/joseluisq/go-tspath) [![Go Report Card](https://goreportcard.com/badge/github.com/joseluisq/go-tspath)](https://goreportcard.com/report/github.com/joseluisq/go-tspath) [![GoDoc](https://godoc.org/github.com/joseluisq/go-tspath?status.svg)](https://godoc.org/github.com/joseluisq/go-tspath)
 
 > A fast [Typescript paths](https://www.typescriptlang.org/docs/handbook/module-resolution.html) replacer written in [Go](https://golang.org/). ⚡
 

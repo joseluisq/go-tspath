@@ -12,7 +12,7 @@ import (
 )
 
 // Replace replaces every TS path occurence per file
-func Replace(filePathAbs string, filePathRel string, outDir string, replacements []tsconfig.TSPathReplacement) {
+func Replace(filePathAbs string, filePathRel string, outDir string, replacements []tsconfig.PathReplacement) {
 	r, err := os.Open(filePathAbs)
 
 	if err != nil {
