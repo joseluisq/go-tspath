@@ -1,5 +1,4 @@
-github.com/joseluisq/go-tspath v0.0.0-20190709225901-b056db4bdeb1/go.mod h1:asAMd6wZ1GxWdXBQksTvwukI36fWxP9Pgu+4pXqAWww=
-github.com/joseluisq/redel v2.1.0+incompatible h1:AAYewJRsFcE3gd5+fsOJN+NtJgU9VRYxnGKItWY+raI=
-github.com/joseluisq/redel v2.1.0+incompatible/go.mod h1:f4/9NWvWrCTEciiUu242vqmkCXNJG9gBtt+14bu5q7E=
+github.com/joseluisq/redel/v3 v3.0.0 h1:n7Ri3OfKW+DT6ZVkhiCzTVoR0uJkfjyG4OWsTuozcf4=
+github.com/joseluisq/redel/v3 v3.0.0/go.mod h1:TFDRmA0EGykaj8AffxaGpb/AkAG5YW3uKEvi2gkycMU=
 github.com/mattn/go-zglob v0.0.1 h1:xsEx/XUoVlI6yXjqBK062zYhRTZltCNmYPx6v+8DNaY=
 github.com/mattn/go-zglob v0.0.1/go.mod h1:9fxibJccNxU2cnpIKLRRFA7zX7qhkJIQWBb449FYHOo=

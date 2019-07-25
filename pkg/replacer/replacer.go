@@ -8,8 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/joseluisq/go-tspath/pkg/tsconfig"
-
-	"github.com/joseluisq/redel"
+	"github.com/joseluisq/redel/v3"
 )
 
 // Replace replaces every TS path occurence per file
