@@ -1,3 +1,4 @@
+// Package tsconfig reads a tsconfig.json content
 package tsconfig
 
 import (

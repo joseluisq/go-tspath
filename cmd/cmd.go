@@ -1,3 +1,4 @@
+// Package cmd process command line arguments
 package cmd
 
 import (

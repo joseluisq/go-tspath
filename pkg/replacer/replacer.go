@@ -1,3 +1,4 @@
+// Package replacer replaces every TS path alias occurence per file using a tsconfig.json
 package replacer
 
 import (
