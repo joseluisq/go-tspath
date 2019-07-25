@@ -1,4 +1,4 @@
-// Package replacer replaces every TS path alias occurence per file using a tsconfig.json
+// Package replacer replaces every TS path alias occurrence per file using a tsconfig.json
 package replacer
 
 import (
@@ -12,7 +12,7 @@ import (
 	"github.com/joseluisq/redel/v3"
 )
 
-// Replace replaces every TS path occurence per file
+// Replace replaces every TS path occurrence per file
 func Replace(filePathAbs string, filePathRel string, outDir string, replacements []tsconfig.PathReplacement) {
 	r, err := os.Open(filePathAbs)
 

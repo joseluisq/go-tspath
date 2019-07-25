@@ -64,7 +64,7 @@ func TestConfig_Read(t *testing.T) {
 				CompilerOptions: CompilerOptions{
 					BaseURL: "./",
 					Paths: map[string][]string{
-						"~/*": []string{"src/*"},
+						"~/*": {"src/*"},
 					},
 					OutDir: "./dist",
 				},
