@@ -4,20 +4,26 @@
 
 **go-tspath** replaces directly [Typescript paths aliases](https://www.typescriptlang.org/docs/handbook/module-resolution.html) into JS files with real paths based on `tsconfig.json`, no more runtime replacers.
 
-__Status:__ Beta
+![go-tspath performing replacements in a production Typescript code base](./preview.png)
 
-_🚀 View current beta releases at [go-tspath/releases](https://github.com/joseluisq/go-tspath/releases)._
+_Screenshot of `go-tspath` performing replacements in a Typescript code base project with more than 200 JS files and around 5857 lines of code._
+
+## Status
+
+**go-tspath** was tested replacing custom path aliases in a Typescript medium size project with desired results (shown in screenshot above).
+But there are some features and more testing cases (community user feedback) to do.
+So, It can considered as **Beta** yet. Contributions will be very appreciated.
 
 ## Installation
 
-Download the latest **go-tspath** binary for your specific platform at [go-tspath/releases](https://github.com/joseluisq/go-tspath/releases).
+🚀 Download the latest **go-tspath** binary for your specific platform at [go-tspath/releases](https://github.com/joseluisq/go-tspath/releases).
 
 ## Usage
 
 ```sh
 # 1. Build TS files via tsc
 # 2. Replace TS paths
-go-tspath -config=./tsconfig.json
+go-tspath -config=./tsconfig.replace.json
 # 3. Just run your app
 # node main.js
 ```
