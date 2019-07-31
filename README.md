@@ -24,6 +24,16 @@ go-tspath -config=./tsconfig.json
 # node main.js
 ```
 
+## Known limitations
+
+- No support for JSON5 format of `tsconfig.json`. But works using a dedicated `tsconfig.json` file with your custom path aliases. See [`sample/tsconfig.replace.json`](https://github.com/joseluisq/go-tspath/blob/master/sample/tsconfig.replace.json)
+- Limited `tsconfig.json` settings for `compilerOptions`. `baseUrl`, `paths` and `outDir` only supported. See [`CompilerOptions struct`](https://github.com/joseluisq/go-tspath/blob/master/pkg/tsconfig/tsconfig.go#L20).
+- No support for `tsconfig.json` features like `extends`, `exclude` or similar.
+
+## Typescript code example
+
+See an example at [`sample`](https://github.com/joseluisq/go-tspath/tree/master/sample) directory.
+
 ## API
 
 ```sh
