@@ -10,9 +10,7 @@ _🚀 View current beta releases at [go-tspath/releases](https://github.com/jose
 
 ## Installation
 
-```sh
-go get -u github.com/joseluisq/go-tspath
-```
+Download the latest **go-tspath** binary for your specific platform at [go-tspath/releases](https://github.com/joseluisq/go-tspath/releases).
 
 ## Usage
 
