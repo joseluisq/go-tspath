@@ -11,7 +11,10 @@ build:
     - amd64
   env:
     - CGO_ENABLED=0
+release:
+  prerelease: auto
 changelog:
+  skip: true
   sort: asc
   filters:
     exclude:
@@ -19,16 +22,18 @@ changelog:
       - '^test:'
       - Merge pull request
       - Merge branch
-sign:
-  cmd: gpg
-  args:
-  - --output
-  - $signature
-  - --detach-sig
-  - $artifact
-  signature: ${artifact}.sig
-  artifacts: none
-env_files:
-  github_token: ~/.config/goreleaser/github_token
+signs:
+  -
+    cmd: gpg
+    args:
+      - --output
+      - $signature
+      - --detach-sig
+      - $artifact
+    signature: ${artifact}.sig
+    artifacts: none
 snapshot:
-  name_template: "{{ .Tag }}-next"
+  name_template: "{{ .Tag }}"
+gitea_urls:
+  api: https://git.joseluisq.net/api/v1/
+  skip_tls_verify: false

@@ -31,7 +31,7 @@ go-tspath -config=./tsconfig.replace.json
 ## Known limitations
 
 - No support for JSON5 format of `tsconfig.json`. But works using a dedicated `tsconfig.json` file with your custom path aliases. See [`sample/tsconfig.replace.json`](https://github.com/joseluisq/go-tspath/blob/master/sample/tsconfig.replace.json)
-- Limited `tsconfig.json` settings for `compilerOptions`. `baseUrl`, `paths` and `outDir` only supported. See [`CompilerOptions struct`](https://github.com/joseluisq/go-tspath/blob/master/pkg/tsconfig/tsconfig.go#L20).
+- Limited `compilerOptions` settings. Only `baseUrl`, `paths` and `outDir` are supported. See [`CompilerOptions struct`](https://github.com/joseluisq/go-tspath/blob/master/pkg/tsconfig/tsconfig.go#L20).
 - No support for `tsconfig.json` features like `extends`, `exclude` or similar.
 
 ## Typescript code example
@@ -52,6 +52,16 @@ Usage of go-tspath:
 Feel free to send some [Pull request](https://github.com/joseluisq/go-tspath/pulls) or [issue](https://github.com/joseluisq/go-tspath/issues).
 
 ## License
-MIT license
 
-© 2019 [Jose Quintana](https://git.io/joseluisq)
+Licensed under either of
+
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+
+at your option.
+
+#### Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.
