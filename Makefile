@@ -1,7 +1,5 @@
 PKG_TARGET=linux
-PKG_BIN_PATH=./bin
-
-PKG_NAME=go-tspath
+PKG_BIN=./bin/go-tspath
 PKG_TAG=$(shell git tag -l --contains HEAD)
 
 
@@ -10,6 +8,7 @@ PKG_TAG=$(shell git tag -l --contains HEAD)
 #######################################
 
 install:
+	@go version
 	@go get -v golang.org/x/lint/golint
 	@go mod download
 .PHONY: install
@@ -35,6 +34,7 @@ dev.release:
 #######################################
 
 test:
+	@go version
 	@golint -set_exit_status ./...
 	@go test -v -timeout 30s -race -coverprofile=coverage.txt -covermode=atomic ./...
 .PHONY: test
@@ -49,18 +49,22 @@ coverage:
 #######################################
 
 prod.release.build:
+	@go version
 	@env \
 		CGO_ENABLED=0 \
-		GOOS=$(GO_OS) \
+		GOOS=$(PKG_TARGET) \
 		go build \
 			-ldflags="-s -w" \
 			-a -installsuffix cgo \
-			-o $(GO_BINARY)
+			-o $(PKG_BIN)
+	@du -sh 
 .ONESHELL: prod.release.build
 
-prod.release:
+prod.release.ci:
 	set -e
 	set -u
 
-	@goreleaser release --rm-dist
-.ONESHELL: prod.release
+	@go version
+	@git tag $(DRONE_TAG)
+	@curl -sL https://git.io/goreleaser | bash
+.ONESHELL: prod.release.ci

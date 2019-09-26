@@ -4,7 +4,7 @@ name: default
 
 steps:
 - name: test
-  image: golang:1.12-buster
+  image: golang:1.13.1-buster
   group: development
   commands:
     - make install
@@ -13,13 +13,12 @@ steps:
     event: push
 
 - name: build-publish-release
-  image: golang:1.12-buster
+  image: golang:1.13.1-buster
   group: production
   environment:
     GITEA_TOKEN:
       from_secret: gitea_token
   commands:
-    - git tag $$DRONE_TAG
-    - curl -sL https://git.io/goreleaser | bash
+    - make prod.release.ci
   when:
     event: tag
