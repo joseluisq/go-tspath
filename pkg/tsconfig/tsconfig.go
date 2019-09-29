@@ -37,7 +37,7 @@ type (
 
 // New creates a new Config instance.
 func New(configPath string) *Config {
-	if len(configPath) <= 0 {
+	if len(configPath) == 0 {
 		configPath = "./tsconfig.json"
 	}
 

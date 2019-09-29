@@ -15,6 +15,7 @@ git:
 
 script:
   - make install
+  - make lint
   - make test
 
 after_success:

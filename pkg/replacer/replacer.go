@@ -63,7 +63,7 @@ func Replace(filePathAbs string, filePathRel string, outDir string, replacements
 
 	filterFunc := func(matchValue []byte) []byte {
 		for _, vtspath := range replacements {
-			if len(vtspath.Replacement) <= 0 {
+			if len(vtspath.Replacement) == 0 {
 				continue
 			}
 

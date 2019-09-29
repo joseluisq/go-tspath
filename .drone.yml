@@ -8,6 +8,7 @@ steps:
   group: development
   commands:
     - make install
+    - make lint
     - make test
   when:
     event: push

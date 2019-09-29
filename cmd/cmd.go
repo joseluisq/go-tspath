@@ -40,20 +40,20 @@ func Execute() {
 	}
 
 	// Create the replacement string array (pattern-replacement)
-	var replacements []tsconfig.PathReplacement
+	replacements := make([]tsconfig.PathReplacement, 0, len(config.CompilerOptions.Paths))
 
 	for keyPathStr, valuePathStr := range config.CompilerOptions.Paths {
 		keyParts := strings.Split(keyPathStr, "/")
 
 		// 0. Prevent no valid paths (key-value)
-		if len(keyParts) <= 0 || len(valuePathStr) <= 0 {
+		if len(keyParts) == 0 || len(valuePathStr) == 0 {
 			continue
 		}
 
 		// 1. Pattern placeholder: Take key parts skipping the last one
 		patternStr := strings.TrimSpace(strings.Join(keyParts[:len(keyParts)-1], "/"))
 
-		if len(patternStr) <= 0 {
+		if len(patternStr) == 0 {
 			continue
 		}
 
@@ -61,20 +61,20 @@ func Execute() {
 		pattern := []byte(patternStr)
 
 		// 2. Replacement placeholder: Take value parts skipping the last one
-		var replacementBytes [][]byte
+		replacementBytes := make([][]byte, 0, len(valuePathStr))
 
 		for _, vpathstr := range valuePathStr {
 			vparts := strings.Split(vpathstr, "/")
 
 			// Prevent no valid replacement paths
-			if len(vparts) <= 0 {
+			if len(vparts) == 0 {
 				continue
 			}
 
 			value := strings.TrimSpace(strings.Join(vparts[:len(vparts)-1], "/"))
 
 			// Prevent empty replacement paths
-			if len(value) <= 0 {
+			if len(value) == 0 {
 				continue
 			}
 
