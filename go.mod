@@ -1,6 +1,6 @@
 module github.com/joseluisq/go-tspath
 
-go 1.12
+go 1.13
 
 require (
 	github.com/joseluisq/redel/v3 v3.0.0
