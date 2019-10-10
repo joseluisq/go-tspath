@@ -4,7 +4,7 @@ PKG_TAG=$(shell git tag -l --contains HEAD)
 
 export GO111MODULE := on
 # enable consistent Go 1.12/1.13 GOPROXY behavior.
-export GOPROXY = https://proxy.golang.org
+export GOPROXY = https://proxy.golang.org,https://gocenter.io,direct
 
 #######################################
 ############# Development #############
